@@ -1,0 +1,14 @@
+{
+  "name": "Zact AI",
+  "short_name": "Zact",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B1220",
+  "theme_color": "#3B82F6",
+  "icons": [
+    { "src": "/zactlogo.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/zactlogo.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
+
+
