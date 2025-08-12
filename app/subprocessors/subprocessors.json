@@ -1,0 +1,9 @@
+[
+  { "name": "AWS", "purpose": "Cloud infrastructure & storage", "dataCategories": "Account, usage, logs", "location": "USA/EU" },
+  { "name": "Sentry", "purpose": "Error monitoring", "dataCategories": "Error logs, metadata", "location": "USA/EU" },
+  { "name": "PostHog", "purpose": "Product analytics", "dataCategories": "Usage events, metadata", "location": "EU" },
+  { "name": "SendGrid", "purpose": "Transactional email", "dataCategories": "Email, notifications", "location": "USA" }
+]
+
+
+

@@ -1,0 +1,7 @@
+Vendor,Purpose,Data categories,Location
+AWS,Cloud infrastructure & storage,Account; usage; logs,USA/EU
+Sentry,Error monitoring,Error logs; metadata,USA/EU
+PostHog,Product analytics,Usage events; metadata,EU
+SendGrid,Transactional email,Email; notifications,USA
+
+
