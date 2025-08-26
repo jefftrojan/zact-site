@@ -11,7 +11,7 @@ export async function POST(req: Request) {
     const eoKey = process.env.EMAILOCTOPUS_API_KEY
     const eoListId = process.env.EMAILOCTOPUS_LIST_ID
     if (eoKey && eoListId) {
-      const res = await fetch(`https://emailoctopus.com/api/1.6/lists/${encodeURIComponent(eoListId)}/contacts`, {
+      const res = await fetch(`https://emailoctopus.com/api/2.0/lists/${encodeURIComponent(eoListId)}/contacts`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
