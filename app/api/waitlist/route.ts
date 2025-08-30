@@ -93,7 +93,7 @@ export async function POST(req: Request) {
             from: { email: sgFrom },
             subject: "You're on the Zact waitlist ✅",
             content: [
-              { type: 'text/html', value: `<p>Hi ${name || ''},</p><p>Thanks for joining the Zact waitlist. We’ll be in touch soon.</p>` }
+              { type: 'text/html', value: `<p>Hi ${name || ''},</p><p>Thanks for joining the Zact waitlist. We'll be in touch soon.</p>` }
             ]
           })
         })
@@ -118,37 +118,38 @@ export async function POST(req: Request) {
       }
     } else {
       // Resend fallback
-    const resendKey = process.env.RESEND_API_KEY
-    const resendFrom = process.env.RESEND_FROM
-    const resendInternal = process.env.RESEND_INTERNAL
-    if (resendKey && resendFrom && resendInternal) {
-      const welcome = fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${resendKey}`,
-        },
-        body: JSON.stringify({
-          from: resendFrom,
-          to: email,
-          subject: "You're on the Zact waitlist ✅",
-          html: `<p>Hi ${name || ''},</p><p>Thanks for joining the Zact waitlist. We’ll be in touch soon.</p>`
+      const resendKey = process.env.RESEND_API_KEY
+      const resendFrom = process.env.RESEND_FROM
+      const resendInternal = process.env.RESEND_INTERNAL
+      if (resendKey && resendFrom && resendInternal) {
+        const welcome = fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${resendKey}`,
+          },
+          body: JSON.stringify({
+            from: resendFrom,
+            to: email,
+            subject: "You're on the Zact waitlist ✅",
+            html: `<p>Hi ${name || ''},</p><p>Thanks for joining the Zact waitlist. We'll be in touch soon.</p>`
+          })
         })
-      })
-      const notify = fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${resendKey}`,
-        },
-        body: JSON.stringify({
-          from: resendFrom,
-          to: resendInternal,
-          subject: 'New waitlist signup',
-          html: `<p>Name: ${name || '(n/a)'}<br/>Email: ${email}</p>`
+        const notify = fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${resendKey}`,
+          },
+          body: JSON.stringify({
+            from: resendFrom,
+            to: resendInternal,
+            subject: 'New waitlist signup',
+            html: `<p>Name: ${name || '(n/a)'}<br/>Email: ${email}</p>`
+          })
         })
-      })
-      await Promise.allSettled([welcome, notify])
+        await Promise.allSettled([welcome, notify])
+      }
     }
 
     return NextResponse.json({ ok: true })
