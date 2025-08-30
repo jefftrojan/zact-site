@@ -1,4 +1,37 @@
 import { NextResponse } from 'next/server'
+import { writeFile, readFile, mkdir } from 'fs/promises'
+import { join } from 'path'
+
+// Helper function to ensure data directory exists
+async function ensureDataDir() {
+  const dataDir = join(process.cwd(), 'data')
+  try {
+    await mkdir(dataDir, { recursive: true })
+  } catch (error) {
+    // Directory might already exist
+  }
+  return dataDir
+}
+
+// Helper function to read existing contacts
+async function readContacts() {
+  try {
+    const dataDir = await ensureDataDir()
+    const contactsFile = join(dataDir, 'waitlist-contacts.json')
+    const data = await readFile(contactsFile, 'utf-8')
+    return JSON.parse(data)
+  } catch (error) {
+    // File doesn't exist or is invalid, return empty array
+    return []
+  }
+}
+
+// Helper function to write contacts
+async function writeContacts(contacts: any[]) {
+  const dataDir = await ensureDataDir()
+  const contactsFile = join(dataDir, 'waitlist-contacts.json')
+  await writeFile(contactsFile, JSON.stringify(contacts, null, 2))
+}
 
 export async function POST(req: Request) {
   try {
@@ -102,6 +135,29 @@ export async function POST(req: Request) {
             console.error('Brevo error:', error)
           }
         }
+      }
+    }
+
+    // If no external contact service is configured, store locally
+    if (!contactAdded) {
+      console.log('Storing contact locally')
+      try {
+        const contacts = await readContacts()
+        const existingIndex = contacts.findIndex((c: any) => c.email === email)
+        
+        if (existingIndex >= 0) {
+          // Update existing contact
+          contacts[existingIndex] = { email, name, updatedAt: new Date().toISOString() }
+        } else {
+          // Add new contact
+          contacts.push({ email, name, createdAt: new Date().toISOString() })
+        }
+        
+        await writeContacts(contacts)
+        contactAdded = true
+        console.log('Contact stored locally successfully')
+      } catch (error) {
+        console.error('Local storage error:', error)
       }
     }
 

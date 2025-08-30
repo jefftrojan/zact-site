@@ -15,6 +15,15 @@ export default function WaitlistDialog({ triggerClass = "", triggerLabel = "Join
     setMounted(true)
   }, [])
 
+  // Reset form when dialog opens
+  useEffect(() => {
+    if (open) {
+      setOk(false)
+      setError(null)
+      setLoading(false)
+    }
+  }, [open])
+
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setLoading(true)
@@ -44,6 +53,11 @@ export default function WaitlistDialog({ triggerClass = "", triggerLabel = "Join
         setOk(true)
         form.reset()
         console.log('Waitlist signup successful:', data.message)
+        
+        // Auto-close dialog after 3 seconds
+        setTimeout(() => {
+          setOpen(false)
+        }, 3000)
       } else {
         throw new Error(data.error || 'Unknown error occurred')
       }
@@ -68,7 +82,16 @@ export default function WaitlistDialog({ triggerClass = "", triggerLabel = "Join
                 <button onClick={() => setOpen(false)} className="text-muted-foreground hover:text-foreground">✕</button>
               </div>
               {ok ? (
-                <div className="mt-4 text-sm text-foreground">Thanks! You're on the list. We'll be in touch.</div>
+                <div className="mt-4 space-y-4">
+                  <div className="text-center">
+                    <div className="text-2xl mb-2">✅</div>
+                    <div className="text-lg font-medium text-foreground">You're on the list!</div>
+                    <div className="text-sm text-muted-foreground mt-1">Thanks for joining. We'll be in touch soon.</div>
+                  </div>
+                  <div className="text-xs text-muted-foreground text-center">
+                    This dialog will close automatically in a few seconds...
+                  </div>
+                </div>
               ) : (
                 <form onSubmit={onSubmit} className="mt-4 space-y-3">
                   <div className="space-y-1">
