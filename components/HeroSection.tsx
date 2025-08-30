@@ -15,7 +15,7 @@ export default function HeroSection() {
   // Keep interactions subtle to avoid overflow and visual jumps
   const scale = useTransform(scrollYProgress, [0, 0.1, 0.6, 0.95], [1, 1, 1.015, 1.02])
   const radius = useTransform(scrollYProgress, [0, 0.1, 0.6, 0.95], [24, 24, 22, 20])
-  const DEMO_MP4_URL = '/demo.mov'
+  const DEMO_MP4_URL = '/demo.mp4'
   const POSTER_URL = '/sc1.png'
   const ICON_HEX = '6B7280' // gray-500
 
@@ -33,7 +33,7 @@ export default function HeroSection() {
     return () => unsub()
   }, [scrollYProgress, isPlaying])
   return (
-    <section className="pt-24 pb-4 bg-background relative overflow-hidden">
+    <section className="pt-20 sm:pt-24 pb-2 sm:pb-4 bg-background relative overflow-hidden">
       {/* Glassmorphism background elements */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-chart-2/10 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-chart-2/10 rounded-full blur-3xl"></div>
@@ -44,7 +44,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="max-w-3xl mx-auto text-center space-y-8"
+          className="max-w-3xl mx-auto text-center space-y-6 sm:space-y-8"
         >
           <div className="space-y-6">
             <motion.div
@@ -57,14 +57,14 @@ export default function HeroSection() {
               <span className="text-sm font-medium">AI-First Company OS</span>
             </motion.div>
 
-            <h1 className="text-4xl lg:text-6xl font-medium leading-tight text-foreground">
+            <h1 className="text-3xl md:text-4xl lg:text-6xl font-medium leading-tight text-foreground">
               Zact — Your AI‑First Company OS 🧠
             </h1>
 
-            <p className="text-lg text-foreground leading-relaxed max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-foreground leading-relaxed max-w-2xl mx-auto">
               One Platform. Every Role. Zero Headcount.
             </p>
-            <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto">
               Zact is the operating system for AI‑run companies, where every department — sales, marketing,
               legal, finance, and product — is handled by specialized, autonomous AI agents that work together
               in real time. Instead of juggling 15+ SaaS tools and endless context‑switching, you simply install
@@ -82,7 +82,7 @@ export default function HeroSection() {
             </a>
           </div>
 
-          <div className="pt-2 flex items-center justify-center gap-6">
+          <div className="pt-2 flex items-center justify-center gap-4 sm:gap-6">
             <p className="text-sm text-muted-foreground">
               Trusted by <span className="font-medium text-foreground">100+ SaaS founders</span>
             </p>
@@ -99,7 +99,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.15 }}
-          className="mt-40"
+          className="mt-16 sm:mt-24 lg:mt-40"
         >
           <div className="text-center">
             <p className="text-muted-foreground mb-8">Integrates with tools you already use</p>
@@ -127,10 +127,10 @@ export default function HeroSection() {
           </div>
         </motion.div>
 
-        <div className="mt-40"/>
+        <div className="mt-16 sm:mt-24 lg:mt-40"/>
         {/* Large Demo Below */}
         {/* Scroll scene: provides room for sticky expansion */}
-        <div ref={demoScrollRef} className="mt-6 lg:mt-8 relative h-[90vh]">
+        <div ref={demoScrollRef} className="mt-4 sm:mt-6 lg:mt-8 relative h-[52vh] sm:h-[70vh] lg:h-[90vh]">
           <motion.div
             id="product-demo"
             ref={demoStickyRef}

@@ -35,21 +35,21 @@ export default function PricingSection() {
   ] as const
 
   return (
-    <section id="pricing" className="py-24 bg-background relative overflow-hidden">
+    <section id="pricing" className="py-16 sm:py-20 lg:py-24 bg-background relative overflow-hidden">
       <div className="container mx-auto px-6">
-        <div className="max-w-5xl mx-auto text-center mb-16">
+        <div className="max-w-5xl mx-auto text-center mb-10 sm:mb-12 lg:mb-16">
           <motion.h2
-            className="text-4xl md:text-6xl font-medium leading-tight text-foreground"
+            className="text-3xl md:text-5xl lg:text-6xl font-medium leading-tight text-foreground"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
             Simple, transparent pricing
           </motion.h2>
-          <p className="text-lg text-muted-foreground mt-6">Join the waitlist today. Pricing tiers will unlock as we roll out access.</p>
+          <p className="text-base sm:text-lg text-muted-foreground mt-4 sm:mt-6">Join the waitlist today. Pricing tiers will unlock as we roll out access.</p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto">
           {tiers.map((tier) => (
             <motion.div
               key={tier.name}
