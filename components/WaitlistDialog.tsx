@@ -23,16 +23,32 @@ export default function WaitlistDialog({ triggerClass = "", triggerLabel = "Join
     const formData = new FormData(form)
     const email = String(formData.get('email') || '')
     const name = String(formData.get('name') || '')
+    
     try {
+      console.log('Submitting waitlist form:', { email, name })
+      
       const res = await fetch('/api/waitlist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, name })
       })
-      if (!res.ok) throw new Error('Failed to join')
-      setOk(true)
-      form.reset()
+      
+      const data = await res.json()
+      console.log('Waitlist API response:', data)
+      
+      if (!res.ok) {
+        throw new Error(data.error || data.message || `HTTP ${res.status}: ${res.statusText}`)
+      }
+      
+      if (data.ok) {
+        setOk(true)
+        form.reset()
+        console.log('Waitlist signup successful:', data.message)
+      } else {
+        throw new Error(data.error || 'Unknown error occurred')
+      }
     } catch (err: any) {
+      console.error('Waitlist submission error:', err)
       setError(err?.message || 'Something went wrong')
     } finally {
       setLoading(false)
@@ -52,7 +68,7 @@ export default function WaitlistDialog({ triggerClass = "", triggerLabel = "Join
                 <button onClick={() => setOpen(false)} className="text-muted-foreground hover:text-foreground">✕</button>
               </div>
               {ok ? (
-                <div className="mt-4 text-sm text-foreground">Thanks! You’re on the list. We’ll be in touch.</div>
+                <div className="mt-4 text-sm text-foreground">Thanks! You're on the list. We'll be in touch.</div>
               ) : (
                 <form onSubmit={onSubmit} className="mt-4 space-y-3">
                   <div className="space-y-1">
