@@ -2,17 +2,40 @@ import { NextResponse } from 'next/server'
 
 export async function POST(req: Request) {
   try {
-    const { email, name } = await req.json()
-    if (!email || typeof email !== 'string') {
-      return NextResponse.json({ error: 'Email required' }, { status: 400 })
+    const body = await req.json()
+    console.log('Tally webhook received:', body)
+
+    // Extract form data from Tally webhook
+    const { eventType, formId, responseId, fields } = body
+
+    if (eventType !== 'FORM_RESPONSE') {
+      return NextResponse.json({ ok: true, message: 'Not a form response' })
     }
-    
-    console.log('Waitlist signup attempt:', { email, name })
-    
+
+    // Extract email and name from Tally fields
+    let email = ''
+    let name = ''
+
+    fields.forEach((field: any) => {
+      if (field.key === 'email' || field.label?.toLowerCase().includes('email')) {
+        email = field.value
+      }
+      if (field.key === 'name' || field.label?.toLowerCase().includes('name') || field.key === 'firstName') {
+        name = field.value
+      }
+    })
+
+    if (!email) {
+      console.error('No email found in Tally response')
+      return NextResponse.json({ error: 'No email found' }, { status: 400 })
+    }
+
+    console.log('Processing Tally signup:', { email, name })
+
     // Provider priority: SendGrid (free tier) -> EmailOctopus (free tier) -> Brevo
     const sgKey = process.env.SENDGRID_API_KEY
     let contactAdded = false
-    
+
     if (sgKey) {
       console.log('Using SendGrid for contacts')
       const sgListId = process.env.SENDGRID_LIST_ID
@@ -145,9 +168,9 @@ export async function POST(req: Request) {
                 body: JSON.stringify({
                   personalizations: [{ to: [{ email: sgInternal }] }],
                   from: { email: sgFrom },
-                  subject: 'New waitlist signup',
+                  subject: 'New waitlist signup (Tally)',
                   content: [
-                    { type: 'text/html', value: `<p>Name: ${name || '(n/a)'}<br/>Email: ${email}</p>` }
+                    { type: 'text/html', value: `<p>Name: ${name || '(n/a)'}<br/>Email: ${email}<br/>Source: Tally Form</p>` }
                   ]
                 })
               })
@@ -189,8 +212,8 @@ export async function POST(req: Request) {
             body: JSON.stringify({
               from: resendFrom,
               to: resendInternal,
-              subject: 'New waitlist signup',
-              html: `<p>Name: ${name || '(n/a)'}<br/>Email: ${email}</p>`
+              subject: 'New waitlist signup (Tally)',
+              html: `<p>Name: ${name || '(n/a)'}<br/>Email: ${email}<br/>Source: Tally Form</p>`
             })
           })
           await Promise.allSettled([welcome, notify])
@@ -203,20 +226,17 @@ export async function POST(req: Request) {
     }
 
     // Log the result
-    console.log('Waitlist signup result:', { contactAdded, emailSent, email, name })
-    
-    // Return success
+    console.log('Tally webhook result:', { contactAdded, emailSent, email, name })
+
     return NextResponse.json({ 
       ok: true, 
       contactAdded, 
       emailSent,
-      message: 'Successfully joined waitlist'
+      message: 'Successfully processed Tally signup'
     })
-    
+
   } catch (e) {
-    console.error('Waitlist API error:', e)
-    return NextResponse.json({ error: 'Invalid request' }, { status: 400 })
+    console.error('Tally webhook error:', e)
+    return NextResponse.json({ error: 'Invalid webhook data' }, { status: 400 })
   }
 }
-
-
