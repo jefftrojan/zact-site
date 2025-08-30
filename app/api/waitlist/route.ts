@@ -1,37 +1,4 @@
 import { NextResponse } from 'next/server'
-import { writeFile, readFile, mkdir } from 'fs/promises'
-import { join } from 'path'
-
-// Helper function to ensure data directory exists
-async function ensureDataDir() {
-  const dataDir = join(process.cwd(), 'data')
-  try {
-    await mkdir(dataDir, { recursive: true })
-  } catch (error) {
-    // Directory might already exist
-  }
-  return dataDir
-}
-
-// Helper function to read existing contacts
-async function readContacts() {
-  try {
-    const dataDir = await ensureDataDir()
-    const contactsFile = join(dataDir, 'waitlist-contacts.json')
-    const data = await readFile(contactsFile, 'utf-8')
-    return JSON.parse(data)
-  } catch (error) {
-    // File doesn't exist or is invalid, return empty array
-    return []
-  }
-}
-
-// Helper function to write contacts
-async function writeContacts(contacts: any[]) {
-  const dataDir = await ensureDataDir()
-  const contactsFile = join(dataDir, 'waitlist-contacts.json')
-  await writeFile(contactsFile, JSON.stringify(contacts, null, 2))
-}
 
 export async function POST(req: Request) {
   try {
@@ -70,13 +37,14 @@ export async function POST(req: Request) {
         if (!contactsRes.ok) {
           const text = await contactsRes.text()
           console.error('SendGrid contacts error:', text)
-          // Don't fail completely, continue to email sending
+          return NextResponse.json({ error: 'Failed to add contact to SendGrid', detail: text }, { status: 502 })
         } else {
           console.log('Contact added to SendGrid successfully')
           contactAdded = true
         }
       } catch (error) {
         console.error('SendGrid contacts error:', error)
+        return NextResponse.json({ error: 'SendGrid service unavailable' }, { status: 502 })
       }
     } else {
       const eoKey = process.env.EMAILOCTOPUS_API_KEY
@@ -97,12 +65,14 @@ export async function POST(req: Request) {
           if (!res.ok) {
             const text = await res.text()
             console.error('EmailOctopus error:', text)
+            return NextResponse.json({ error: 'Failed to add contact to EmailOctopus', detail: text }, { status: 502 })
           } else {
             console.log('Contact added to EmailOctopus successfully')
             contactAdded = true
           }
         } catch (error) {
           console.error('EmailOctopus error:', error)
+          return NextResponse.json({ error: 'EmailOctopus service unavailable' }, { status: 502 })
         }
       } else {
         const brevoKey = process.env.BREVO_API_KEY
@@ -127,37 +97,18 @@ export async function POST(req: Request) {
             if (!res.ok) {
               const text = await res.text()
               console.error('Brevo error:', text)
+              return NextResponse.json({ error: 'Failed to add contact to Brevo', detail: text }, { status: 502 })
             } else {
               console.log('Contact added to Brevo successfully')
               contactAdded = true
             }
           } catch (error) {
             console.error('Brevo error:', error)
+            return NextResponse.json({ error: 'Brevo service unavailable' }, { status: 502 })
           }
-        }
-      }
-    }
-
-    // If no external contact service is configured, store locally
-    if (!contactAdded) {
-      console.log('Storing contact locally')
-      try {
-        const contacts = await readContacts()
-        const existingIndex = contacts.findIndex((c: any) => c.email === email)
-        
-        if (existingIndex >= 0) {
-          // Update existing contact
-          contacts[existingIndex] = { email, name, updatedAt: new Date().toISOString() }
         } else {
-          // Add new contact
-          contacts.push({ email, name, createdAt: new Date().toISOString() })
+          return NextResponse.json({ error: 'No email marketing service configured. Please set up SendGrid, EmailOctopus, or Brevo.' }, { status: 500 })
         }
-        
-        await writeContacts(contacts)
-        contactAdded = true
-        console.log('Contact stored locally successfully')
-      } catch (error) {
-        console.error('Local storage error:', error)
       }
     }
 
@@ -254,14 +205,12 @@ export async function POST(req: Request) {
     // Log the result
     console.log('Waitlist signup result:', { contactAdded, emailSent, email, name })
     
-    // Return success even if some operations failed, as long as we processed the request
+    // Return success
     return NextResponse.json({ 
       ok: true, 
       contactAdded, 
       emailSent,
-      message: contactAdded || emailSent 
-        ? 'Successfully joined waitlist' 
-        : 'Joined waitlist (some services unavailable)'
+      message: 'Successfully joined waitlist'
     })
     
   } catch (e) {
