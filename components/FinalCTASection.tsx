@@ -7,7 +7,7 @@ import { ArrowRight } from 'lucide-react'
 
 export default function FinalCTASection() {
   return (
-    <section className="py-24 bg-primary text-primary-foreground relative overflow-hidden">
+    <section className="py-16 sm:py-20 lg:py-24 bg-primary text-primary-foreground relative overflow-hidden">
       {/* Glassmorphism background elements */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/80 to-primary/60 backdrop-blur-3xl"></div>
       <div className="absolute top-0 left-0 w-96 h-96 bg-white/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
@@ -22,11 +22,11 @@ export default function FinalCTASection() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl lg:text-6xl font-medium leading-tight">
+            <h2 className="text-2xl md:text-4xl lg:text-6xl font-medium leading-tight">
               Focus on building.<br/>
               <span className="text-primary-foreground/70">Let Zact run everything else.</span>
             </h2>
-            <p className="text-lg text-primary-foreground/80 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg text-primary-foreground/80 max-w-2xl mx-auto leading-relaxed">
               Join the waitlist and be among the first to experience the future of AI-powered business operations.
             </p>
             <div className="pt-4">

@@ -14,7 +14,7 @@ export default function ProblemSection() {
   ]
 
   return (
-    <section className="pt-16 pb-24 bg-muted/30" id="problem">
+    <section className="pt-12 sm:pt-16 pb-16 sm:pb-24 bg-muted/30" id="problem">
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
           <motion.div
@@ -31,7 +31,7 @@ export default function ProblemSection() {
             </p>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-16">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16">
             {/* Before - Tool Chaos */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}

@@ -147,7 +147,7 @@ export default function FeaturesSection() {
   ];
 
   return (
-    <section className="py-24 bg-muted/30 relative overflow-hidden" id="features">
+    <section className="py-16 sm:py-20 lg:py-24 bg-muted/30 relative overflow-hidden" id="features">
       {/* Glassmorphism background elements */}
       <div className="absolute top-1/4 right-0 w-96 h-96 bg-chart-1/5 rounded-full blur-3xl"></div>
       <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-chart-2/5 rounded-full blur-3xl"></div>
@@ -155,14 +155,14 @@ export default function FeaturesSection() {
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-7xl mx-auto">
           <motion.div
-            className="text-center mb-16"
+            className="text-center mb-10 sm:mb-12 lg:mb-16"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl lg:text-5xl font-medium mb-6 text-foreground">Example Agents</h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">Install agents like you’d hire employees — but faster, cheaper, and smarter.</p>
+            <h2 className="text-2xl md:text-3xl lg:text-5xl font-medium mb-4 lg:mb-6 text-foreground">Example Agents</h2>
+            <p className="text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto">Install agents like you’d hire employees — but faster, cheaper, and smarter.</p>
           </motion.div>
 
           {/* Highlights strip (reference style) */}
