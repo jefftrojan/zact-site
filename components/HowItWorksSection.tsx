@@ -1,77 +1,128 @@
 "use client";
 
-import { motion } from 'framer-motion'
-import { MessageSquare, Search, CalendarDays, Video } from 'lucide-react'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useState, useRef } from 'react'
 
 export default function HowItWorksSection() {
-  const SCREENSHOT_URL = '/sc2.png';
+  const [activeStep, setActiveStep] = useState(0)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  })
 
+  const steps = [
+    {
+      title: "Create Agents",
+      subtitle: "Assign names, roles, and tasks",
+      points: [
+        "Name the agent and define its scope",
+        "Set guardrails and approval rules",
+        "Give it access only to what it needs"
+      ]
+    },
+    {
+      title: "Connect Workflows", 
+      subtitle: "Integrate with your tools",
+      points: [
+        "Hook into Slack, Notion, Jira, Calendar, CRM",
+        "Use existing accounts and permissions",
+        "Keep your data in your stack"
+      ]
+    },
+    {
+      title: "Collaborate Live",
+      subtitle: "Talk in real-time meetings",
+      points: [
+        "Run stand‑ups and planning with voice commands",
+        "Ask for summaries, next steps, owners",
+        "See updates posted where you already work"
+      ]
+    },
+    {
+      title: "Get Things Done",
+      subtitle: "Instant action and results",
+      points: [
+        "Schedule follow‑ups and calendar holds",
+        "Open Jira issues and update status",
+        "Draft notes and share to Slack/Notion"
+      ]
+    }
+  ]
+  
   return (
-    <section id="how-it-works" className="py-16 sm:py-20 lg:py-24 bg-background relative overflow-hidden">
-      {/* Floating brand icons (kept tight, non-overflowing) */}
-      <div className="pointer-events-none select-none absolute inset-0 z-20 flex items-center justify-center">
-        <div className="hidden md:block absolute top-24 left-[22%] w-24 h-24 rounded-2xl bg-card/95 shadow-2xl border border-border/60 p-5 rotate-6">
-          <img src="https://cdn.simpleicons.org/slack/4A154B" alt="Slack" className="w-full h-full object-contain" loading="lazy" />
-        </div>
-        <div className="hidden md:block absolute top-28 right-[22%] w-24 h-24 rounded-2xl bg-card/95 shadow-2xl border border-border/60 p-5 -rotate-3">
-          <img src="https://cdn.simpleicons.org/hubspot/FF7A59" alt="HubSpot" className="w-full h-full object-contain" loading="lazy" />
-        </div>
-        <div className="hidden md:block absolute bottom-16 left-[24%] w-24 h-24 rounded-2xl bg-card/95 shadow-2xl border border-border/60 p-5 -rotate-2">
-          <img src="https://cdn.simpleicons.org/stripe/635BFF" alt="Stripe" className="w-full h-full object-contain" loading="lazy" />
-        </div>
-        <div className="hidden md:block absolute bottom-10 right-[24%] w-24 h-24 rounded-2xl bg-card/95 shadow-2xl border border-border/60 p-5 rotate-3">
-          <img src="https://cdn.simpleicons.org/notion/000000" alt="Notion" className="w-full h-full object-contain" loading="lazy" />
-        </div>
-      </div>
-
-      <div className="container mx-auto px-6 relative z-10 overflow-hidden">
-        <div className="max-w-5xl mx-auto text-center mb-10 sm:mb-12 lg:mb-14">
+    <section ref={containerRef} id="how-it-works" className="min-h-[85vh] flex">
+      {/* Left Side - Dark Blue */}
+      <div className="w-1/2 bg-primary relative flex items-center justify-center sticky top-20 self-start">
+        <div className="max-w-md px-8">
           <motion.div
+            key={activeStep}
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5 }}
+            className="text-center"
           >
-            <div className="text-chart-2 text-sm font-medium mb-4">How Zact works</div>
-            <h2 className="text-3xl md:text-5xl lg:text-6xl font-medium leading-tight text-foreground">
-              Agents handle the work
-              <br />
-              so you can ship faster
+            <div className="mx-auto mb-6 w-12 h-12 rounded-full bg-primary-foreground/10 text-primary-foreground flex items-center justify-center text-base font-medium">
+              {String(activeStep + 1).padStart(2, '0')}
+            </div>
+            <h2 className="text-3xl font-medium text-primary-foreground mb-2">
+              {steps[activeStep].title}
             </h2>
-            <p className="mt-4 sm:mt-6 text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
-              Tell Zact what you need in plain English. It coordinates your tools, drafts the next steps,
-              opens the right tasks, and flags what needs attention — keeping your team in flow.
+            <p className="text-base text-primary-foreground/80">
+              {steps[activeStep].subtitle}
             </p>
           </motion.div>
         </div>
-
-        {/* Screenshot card */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.98 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="max-w-6xl mx-auto bg-card/80 border border-border rounded-3xl shadow-2xl overflow-hidden backdrop-blur-xl"
-        >
-          {/* Window chrome */}
-          <div className="bg-muted/30 border-b border-border/50 p-4 flex items-center gap-3 backdrop-blur-sm">
-            <div className="flex gap-2">
-              <div className="w-3 h-3 rounded-full bg-destructive"></div>
-              <div className="w-3 h-3 rounded-full bg-chart-4"></div>
-              <div className="w-3 h-3 rounded-full bg-chart-2"></div>
-            </div>
-            <div className="flex-1 bg-muted/50 rounded px-3 py-1 text-xs text-muted-foreground">app.usezact.com</div>
-          </div>
-
-          <div className="relative w-full pb-[62%]">
-            <img
-              src={SCREENSHOT_URL}
-              alt="Zact product screenshot"
-              className="absolute inset-0 w-full h-full object-cover"
-              loading="lazy"
+        
+        {/* Progress dots */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
+          {steps.map((_, index) => (
+            <motion.div
+              key={index}
+              className={`w-2 h-2 rounded-full transition-colors duration-300 ${
+                activeStep === index ? 'bg-primary-foreground' : 'bg-primary-foreground/30'
+              }`}
+              onClick={() => setActiveStep(index)}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-background/0 pointer-events-none" />
-          </div>
-        </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* Right Side - White */}
+      <div className="w-1/2 bg-background">
+        <div className="max-w-2xl mx-auto px-8 py-16">
+          {steps.map((step, index) => (
+            <motion.div
+              key={step.title}
+              className={`mb-16 transition-all duration-500 ${
+                activeStep === index ? 'opacity-100' : 'opacity-30'
+              }`}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: activeStep === index ? 1 : 0.3 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              onViewportEnter={() => setActiveStep(index)}
+            >
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-muted/60 text-foreground/80 text-xs font-medium flex items-center justify-center">
+                    {String(index + 1).padStart(2, '0')}
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-medium text-foreground">{step.title}</h3>
+                    <p className="text-sm text-muted-foreground">{step.subtitle}</p>
+                  </div>
+                </div>
+                <ul className="list-disc pl-6 space-y-2">
+                  {step.points.map((p) => (
+                    <li key={p} className="text-muted-foreground">{p}</li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   )

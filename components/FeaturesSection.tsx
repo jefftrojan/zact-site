@@ -161,25 +161,33 @@ export default function FeaturesSection() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-2xl md:text-3xl lg:text-5xl font-medium mb-4 lg:mb-6 text-foreground">Example Agents</h2>
-            <p className="text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto">Install agents like you’d hire employees — but faster, cheaper, and smarter.</p>
+            <h2 className="text-2xl md:text-3xl lg:text-5xl font-medium mb-4 lg:mb-6 text-foreground">Why Zact</h2>
+            <p className="text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto">Humans and AI collaborate in one workspace. Speak naturally, get instant action, and watch agents learn and adapt.</p>
           </motion.div>
 
           {/* Highlights strip (reference style) */}
           <motion.div
-            className="grid md:grid-cols-2 gap-4 mb-10"
+            className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-10"
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
             <div className="bg-card/70 border border-border/40 rounded-xl p-5 backdrop-blur-xl">
-              <div className="text-sm font-medium text-foreground mb-1">Regain Focus Time</div>
-              <div className="text-muted-foreground text-sm">Stop status meetings. Zact answers what’s moving, what’s stuck, and what’s next.</div>
+              <div className="text-sm font-medium text-foreground mb-1">🧩 Unified Team</div>
+              <div className="text-muted-foreground text-sm">Humans and AI in one workspace.</div>
             </div>
             <div className="bg-card/70 border border-border/40 rounded-xl p-5 backdrop-blur-xl">
-              <div className="text-sm font-medium text-foreground mb-1">Spot blockers early</div>
-              <div className="text-muted-foreground text-sm">Detect risks, delays, and stalled dependencies in real time — not post‑mortem.</div>
+              <div className="text-sm font-medium text-foreground mb-1">🎙️ Natural Conversations</div>
+              <div className="text-muted-foreground text-sm">Speak naturally. Agents understand context.</div>
+            </div>
+            <div className="bg-card/70 border border-border/40 rounded-xl p-5 backdrop-blur-xl">
+              <div className="text-sm font-medium text-foreground mb-1">⚡ Instant Action</div>
+              <div className="text-muted-foreground text-sm">Integrated with your tools, not just chat.</div>
+            </div>
+            <div className="bg-card/70 border border-border/40 rounded-xl p-5 backdrop-blur-xl">
+              <div className="text-sm font-medium text-foreground mb-1">🧠 Always Learning</div>
+              <div className="text-muted-foreground text-sm">Agents remember, improve, and adapt to your workflow.</div>
             </div>
           </motion.div>
 
@@ -342,47 +350,22 @@ export default function FeaturesSection() {
             viewport={{ once: true }}
           >
             <div className="text-center mb-8">
-              <h3 className="text-2xl font-medium text-foreground mb-4">Meet Your AI Team</h3>
-              <p className="text-muted-foreground">Specialized agents that work together to run your entire business</p>
+              <h3 className="text-2xl font-medium text-foreground mb-4">Example Use Cases</h3>
+              <p className="text-muted-foreground">See how teams collaborate with AI agents during live conversations.</p>
             </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {agentShowcase.map((agent, index) => (
-                <motion.div
-                  key={agent.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="text-center space-y-4"
-                >
-                  <div className={`w-16 h-16 bg-${agent.color}/10 border border-${agent.color}/20 rounded-2xl flex items-center justify-center mx-auto backdrop-blur-sm`}>
-                    <agent.icon className={`w-8 h-8 text-${agent.color}`} />
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-foreground mb-2">{agent.name}</h4>
-                    <ul className="space-y-1">
-                      {agent.tasks.map((task) => (
-                        <li key={task} className="text-sm text-muted-foreground">{task}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-            <div className="mt-8 pt-8 border-t border-border/30 text-center">
-            <motion.div
-                className="flex items-center justify-center gap-4 mb-4"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-              viewport={{ once: true }}
-            >
-                <Cpu className="w-6 h-6 text-primary" />
-                <span className="font-medium text-foreground">Coordination Engine</span>
-              </motion.div>
-              <p className="text-sm text-muted-foreground max-w-md mx-auto">
-                All agents share context through our central coordination engine, ensuring seamless collaboration and optimal outcomes.
-              </p>
+            <div className="grid md:grid-cols-3 gap-6 text-left">
+              <div className="bg-muted/20 rounded-xl p-5 border border-border/30">
+                <div className="text-sm text-muted-foreground mb-2">Product Teams</div>
+                <div className="text-sm text-foreground">“Ava, summarize last sprint and generate the next tasks.”</div>
+              </div>
+              <div className="bg-muted/20 rounded-xl p-5 border border-border/30">
+                <div className="text-sm text-muted-foreground mb-2">Sales Teams</div>
+                <div className="text-sm text-foreground">“Leo, update the CRM with today’s call notes.”</div>
+              </div>
+              <div className="bg-muted/20 rounded-xl p-5 border border-border/30">
+                <div className="text-sm text-muted-foreground mb-2">Founders</div>
+                <div className="text-sm text-foreground">“Hey Zact, schedule investor sync for next week.”</div>
+              </div>
             </div>
           </motion.div>
         </div>
