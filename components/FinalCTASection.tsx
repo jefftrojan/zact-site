@@ -23,18 +23,17 @@ export default function FinalCTASection() {
             viewport={{ once: true }}
           >
             <h2 className="text-2xl md:text-4xl lg:text-6xl font-medium leading-tight">
-              Focus on building.<br/>
-              <span className="text-primary-foreground/70">Let Zact run everything else.</span>
+              Join the Future of Work
             </h2>
             <p className="text-base sm:text-lg text-primary-foreground/80 max-w-2xl mx-auto leading-relaxed">
-              Join the waitlist and be among the first to experience the future of AI-powered business operations.
+              Zact is redefining how teams and AI collaborate. Because work should feel like teamwork — even with machines.
             </p>
             <div className="pt-4">
-              <WaitlistDialog triggerClass="bg-background text-foreground hover:bg-background/90 px-8 py-4 backdrop-blur-sm border border-white/20 shadow-2xl" />
+              <WaitlistDialog triggerLabel="Request Invite →" triggerClass="bg-background text-foreground hover:bg-background/90 px-8 py-4 backdrop-blur-sm border border-white/20 shadow-2xl" />
             </div>
             <div className="pt-8">
               <p className="text-sm text-primary-foreground/60">
-                No spam. Unsubscribe anytime. Built for SaaS founders, by SaaS founders.
+                Talk. Act. Zact.
               </p>
             </div>
           </motion.div>

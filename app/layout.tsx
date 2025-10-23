@@ -10,23 +10,23 @@ const plusJakarta = Plus_Jakarta_Sans({ subsets: ['latin'], weight: ['400','500'
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.usezact.com'),
   title: {
-    default: 'Zact AI — AI‑First Company OS',
-    template: '%s | Zact AI'
+    default: 'Zact — The Zoom for AI Agents',
+    template: '%s | Zact'
   },
-  description: 'Replace 15+ SaaS tools with coordinated AI agents for SaaS founders.',
+  description: 'Create, name, and talk to your AI agents like real teammates — with voice, memory, and workflow integration.',
   keywords: [
     'AI agents',
-    'SaaS growth',
-    'automation',
-    'multi‑agent system',
-    'startup tools',
-    'Zact AI'
+    'voice AI',
+    'workflow automation',
+    'meeting AI',
+    'Zoom for AI',
+    'Zact'
   ],
   openGraph: {
-    title: 'Zact AI — AI‑First Company OS',
-    description: 'Replace 15+ SaaS tools with coordinated AI agents for SaaS founders.',
+    title: 'Zact — The Zoom for AI Agents',
+    description: 'Create, name, and talk to your AI agents like real teammates — in live meetings with voice, memory, and workflow integration.',
     url: 'https://www.usezact.com',
-    siteName: 'Zact AI',
+    siteName: 'Zact',
     images: [
       { url: '/zactlogo.png', width: 1200, height: 630, alt: 'Zact AI' }
     ],
@@ -35,8 +35,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Zact AI — AI‑First Company OS',
-    description: 'Replace 15+ SaaS tools with coordinated AI agents for SaaS founders.',
+    title: 'Zact — The Zoom for AI Agents',
+    description: 'Talk to AI agents like teammates. Voice, memory, workflow integration.',
     images: ['/zactlogo.png']
   },
   icons: {
