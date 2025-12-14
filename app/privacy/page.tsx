@@ -1,4 +1,5 @@
 import Link from "next/link";
+import CinematicBackground from "../../components/CinematicBackground";
 
 export const metadata = {
   title: "Privacy Policy — Zact",
@@ -8,7 +9,12 @@ export const metadata = {
 
 export default function PrivacyPage() {
   return (
-    <main className="py-20 sm:py-24">
+    <main className="py-20 sm:py-24 relative overflow-hidden">
+      <CinematicBackground
+        src="/bg-2.png"
+        overlay={0.93}
+        imageClassName="object-cover object-center"
+      />
       <div className="container mx-auto px-6">
         <div className="max-w-3xl mx-auto">
           <div className="mb-10">

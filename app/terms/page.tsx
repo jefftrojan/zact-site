@@ -4,10 +4,16 @@ export const metadata = {
 }
 
 import Link from "next/link";
+import CinematicBackground from "../../components/CinematicBackground";
 
 export default function TermsPage() {
   return (
-    <main className="py-20 sm:py-24">
+    <main className="py-20 sm:py-24 relative overflow-hidden">
+      <CinematicBackground
+        src="/bg-1.png"
+        overlay={0.94}
+        imageClassName="object-cover object-center"
+      />
       <div className="container mx-auto px-6">
         <div className="max-w-3xl mx-auto">
           <div className="mb-10">

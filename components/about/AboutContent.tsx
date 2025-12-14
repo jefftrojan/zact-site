@@ -72,8 +72,9 @@ export default function AboutContent() {
         </div>
       </section>
 
-      <section className="py-16 sm:py-20">
-        <div className="container mx-auto px-6">
+      <section className="py-16 sm:py-20 relative overflow-hidden">
+        <CinematicBackground src="/bg-2.png" overlay={0.88} imageClassName="object-cover object-center" />
+        <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-5xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
@@ -125,8 +126,9 @@ export default function AboutContent() {
         </div>
       </section>
 
-      <section className="py-20">
-        <div className="container mx-auto px-6 max-w-5xl">
+      <section className="py-20 relative overflow-hidden">
+        <CinematicBackground src="/bg-3.png" overlay={0.88} imageClassName="object-cover object-center" />
+        <div className="container mx-auto px-6 max-w-5xl relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

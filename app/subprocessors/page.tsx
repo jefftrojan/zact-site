@@ -1,4 +1,5 @@
 import data from './subprocessors.json'
+import CinematicBackground from "../../components/CinematicBackground";
 
 type Subprocessor = {
   name: string
@@ -15,7 +16,12 @@ export const metadata = {
 export default function SubprocessorsPage() {
   const rows = (data as Subprocessor[])
   return (
-    <main className="py-20 sm:py-24">
+    <main className="py-20 sm:py-24 relative overflow-hidden">
+      <CinematicBackground
+        src="/bg-mascot.png"
+        overlay={0.94}
+        imageClassName="object-cover object-center"
+      />
       <div className="container mx-auto px-6">
         <div className="max-w-5xl mx-auto">
           <div className="mb-10">
