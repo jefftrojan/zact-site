@@ -8,7 +8,7 @@ import CinematicBackground from '../CinematicBackground'
 
 export default function AboutContent() {
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen">
       <section className="pt-28 pb-16 relative overflow-hidden">
         <CinematicBackground
           src="/bg-hero.png"
