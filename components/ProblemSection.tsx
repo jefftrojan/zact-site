@@ -18,9 +18,9 @@ export default function ProblemSection() {
   ]
 
   return (
-    <section className="pt-12 sm:pt-16 pb-16 sm:pb-24 relative overflow-hidden" id="problem">
+    <section className="min-h-[100svh] flex items-center relative overflow-hidden" id="problem">
       <CinematicBackground src="/bg-1.png" overlay={0.82} imageClassName="object-cover object-center" />
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-6 py-16 sm:py-20 lg:py-24 relative z-10">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

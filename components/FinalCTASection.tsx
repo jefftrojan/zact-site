@@ -8,10 +8,10 @@ import CinematicBackground from './CinematicBackground'
 
 export default function FinalCTASection() {
   return (
-    <section className="py-16 sm:py-20 lg:py-24 relative overflow-hidden">
+    <section className="min-h-[100svh] flex items-center relative overflow-hidden">
       <CinematicBackground src="/bg-mascot.png" overlay={0.84} imageClassName="object-cover object-center" />
       
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-6 py-16 sm:py-20 lg:py-24 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div 
             className="space-y-8"

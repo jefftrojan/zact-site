@@ -52,10 +52,10 @@ export default function FeaturesSection() {
   }, [mode]);
 
   return (
-    <section className="py-16 sm:py-20 lg:py-24 relative overflow-hidden" id="features">
+    <section className="min-h-[100svh] flex items-center relative overflow-hidden" id="features">
       <CinematicBackground src="/bg-2.png" overlay={0.82} imageClassName="object-cover object-center" />
       
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-6 py-16 sm:py-20 lg:py-24 relative z-10">
         <div className="max-w-7xl mx-auto">
           <motion.div
             className="text-center mb-10 sm:mb-12 lg:mb-16"

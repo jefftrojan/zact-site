@@ -48,7 +48,7 @@ export default function HowItWorksSection() {
   ]
   
   return (
-    <section id="how-it-works" className="relative overflow-hidden">
+    <section id="how-it-works" className="min-h-[100svh] flex items-center relative overflow-hidden">
       <CinematicBackground src="/bg-3.png" overlay={0.86} imageClassName="object-cover object-center" />
       <div className="relative z-10 container mx-auto px-6 py-16 sm:py-20 lg:py-24">
         <div className="max-w-6xl mx-auto">
