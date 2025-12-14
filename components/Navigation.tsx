@@ -10,9 +10,13 @@ export default function Navigation() {
         <div className="pointer-events-auto mx-auto max-w-3xl flex items-center justify-between h-14 rounded-2xl bg-background/80 backdrop-blur-xl border border-border/50 shadow-xl px-4">
           {/* Logo */}
           <div className="flex items-center">
-            <h1 className="text-xl font-medium text-foreground">
+            <Link
+              href="/"
+              aria-label="Go to home"
+              className="text-xl font-display font-semibold text-foreground hover:text-foreground/90 transition-colors"
+            >
               {"{zact}"}
-            </h1>
+            </Link>
           </div>
 
           {/* Navigation Links - Hidden on mobile */}

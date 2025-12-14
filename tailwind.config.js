@@ -16,6 +16,26 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        sans: [
+          "var(--font-inter)",
+          "ui-sans-serif",
+          "system-ui",
+          "-apple-system",
+          "Segoe UI",
+          "Roboto",
+          "Helvetica",
+          "Arial",
+          "Noto Sans",
+          "Apple Color Emoji",
+          "Segoe UI Emoji",
+        ],
+        display: [
+          "var(--font-space-grotesk)",
+          "ui-sans-serif",
+          "system-ui",
+        ],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

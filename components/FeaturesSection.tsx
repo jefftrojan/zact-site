@@ -2,155 +2,58 @@
 
 import { motion } from "framer-motion";
 import {
-  Workflow,
-  Database,
-  Brain,
-  Clock,
-  Shield,
-  BarChart3,
-  Zap,
-  Users,
+  Calendar,
   MessageSquare,
-  Target,
-  Cpu,
-  Lock,
+  FileText,
 } from "lucide-react";
+import CinematicBackground from "./CinematicBackground";
+import { useMemo, useState } from "react";
 
 export default function FeaturesSection() {
+  const [mode, setMode] = useState<"during" | "after">("during");
+
   const primaryFeatures = [
     {
-      icon: Workflow,
-      title: "End-to-End Automation",
+      icon: Calendar,
+      title: "Joins meetings automatically",
       description:
-        "From lead generation to customer success, everything flows through one coordinated system with no manual handoffs.",
-      benefits: [
-        "Zero context switching",
-        "Automated workflows",
-        "Instant execution",
-      ],
+        "Zact shows up on time with meeting context so you don’t have to copy/paste agendas or remind it who’s who.",
+      benefits: ["Calendar‑aware", "Prepared from the invite", "Stays relevant"],
     },
     {
-      icon: Database,
-      title: "Shared Context",
-      description:
-        "Agents communicate with each other, sharing customer data and insights in real-time across your entire business.",
-      benefits: [
-        "Unified data layer",
-        "Real-time sync",
-        "Cross-functional insights",
-      ],
-    },
-    {
-      icon: Brain,
-      title: "SaaS-Specific Intelligence",
-      description:
-        "Pre-trained on SaaS metrics, funnels, and growth strategies that actually work for subscription businesses.",
-      benefits: [
-        "SaaS expertise built-in",
-        "Industry best practices",
-        "Proven strategies",
-      ],
-    },
-  ];
-
-  const metrics = [
-    { label: "Time saved", value: "70%", sub: "per founder", color: "chart-1" },
-    { label: "Conversion lift", value: "+40%", sub: "trial → paid", color: "chart-2" },
-    { label: "Tools replaced", value: "15+", sub: "avg stack", color: "chart-4" },
-  ];
-
-  const featureColors = ["chart-1", "chart-2", "chart-4"] as const;
-  const metricFromClasses = ["from-chart-1/40", "from-chart-2/40", "from-chart-4/40"] as const;
-
-  const secondaryFeatures = [
-    {
-      icon: Clock,
-      title: "Real-Time Decisions",
-      desc: "Actions triggered instantly",
-    },
-    {
-      icon: Shield,
-      title: "Enterprise Security",
-      desc: "SOC 2 compliant & encrypted",
-    },
-    {
-      icon: BarChart3,
-      title: "Built-in Analytics",
-      desc: "Unified reporting dashboard",
-    },
-    {
-      icon: Zap,
-      title: "Lightning Fast",
-      desc: "Sub-second response times",
-    },
-    {
-      icon: Users,
-      title: "Team Collaboration",
-      desc: "Human oversight & approval",
-    },
-    {
-      icon: Target,
-      title: "Goal Optimization",
-      desc: "AI-driven goal achievement",
-    },
-  ];
-
-  const comparisonPairs = [
-    {
-      oldTitle: "Manual handoffs",
-      oldDesc: "People pass tasks across apps",
-      newTitle: "Automated flows",
-      newDesc: "Agents coordinate end‑to‑end",
-      color: "chart-1",
-    },
-    {
-      oldTitle: "Siloed tools",
-      oldDesc: "Data scattered in 15+ systems",
-      newTitle: "Shared context",
-      newDesc: "One brain across your stack",
-      color: "chart-2",
-    },
-    {
-      oldTitle: "Slow decisions",
-      oldDesc: "Wait for weekly reviews",
-      newTitle: "Real‑time actions",
-      newDesc: "Metrics → action in seconds",
-      color: "chart-4",
-    },
-  ];
-
-  const agentShowcase = [
-    {
-      name: "Growth Agent",
-      icon: Zap,
-      tasks: ["Landing pages", "A/B testing", "CAC tracking"],
-      color: "chart-1",
-    },
-    {
-      name: "Finance Agent",
-      icon: BarChart3,
-      tasks: ["Bookkeeping", "Budgets", "Reporting"],
-      color: "chart-2",
-    },
-    {
-      name: "Legal Agent",
-      icon: Lock,
-      tasks: ["Contracts", "Compliance", "NDAs"],
-      color: "chart-3",
-    },
-    {
-      name: "Success Agent",
       icon: MessageSquare,
-      tasks: ["Onboarding", "Health scores", "Retention"],
-      color: "chart-4",
+      title: "Active in‑meeting participation",
+      description:
+        "Zact can speak up, ask clarifying questions, and keep the group aligned — not just sit quietly taking notes.",
+      benefits: ["Speaks when it matters", "Tracks unresolved threads", "Drives to decisions"],
+    },
+    {
+      icon: FileText,
+      title: "Automatic follow‑through",
+      description:
+        "After the meeting, it converts what happened into execution — tasks, docs, and updates — without you chasing people.",
+      benefits: ["Decisions → tasks", "Owners + deadlines", "Syncs to your tools"],
     },
   ];
+
+  const modeLines = useMemo(() => {
+    if (mode === "during") {
+      return [
+        "Uses meeting context (title, agenda, attendees) to stay relevant",
+        "Can speak up to clarify owners, deadlines, and open questions",
+        "Keeps a real-time memory of what was decided and what’s unresolved",
+      ];
+    }
+    return [
+      "Creates a clean recap + decisions (not a raw transcript)",
+      "Sends follow‑ups and syncs outcomes into docs + tasks",
+      "Maintains history + notifications so nothing slips",
+    ];
+  }, [mode]);
 
   return (
-    <section className="py-16 sm:py-20 lg:py-24 bg-muted/30 relative overflow-hidden" id="features">
-      {/* Glassmorphism background elements */}
-      <div className="absolute top-1/4 right-0 w-96 h-96 bg-chart-1/5 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-chart-2/5 rounded-full blur-3xl"></div>
+    <section className="py-16 sm:py-20 lg:py-24 relative overflow-hidden" id="features">
+      <CinematicBackground src="/bg-2.png" overlay={0.82} imageClassName="object-cover object-center" />
       
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-7xl mx-auto">
@@ -161,210 +64,81 @@ export default function FeaturesSection() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-2xl md:text-3xl lg:text-5xl font-medium mb-4 lg:mb-6 text-foreground">Why Zact</h2>
-            <p className="text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto">Humans and AI collaborate in one workspace. Speak naturally, get instant action, and watch agents learn and adapt.</p>
+            <h2 className="text-2xl md:text-3xl lg:text-5xl font-display font-semibold mb-4 lg:mb-6 text-foreground">
+              Built for real conversations
+            </h2>
+            <p className="text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto">
+              Zact is a full‑stack platform for AI meeting assistants that actively participate and automatically sync outcomes to your workspace.
+            </p>
           </motion.div>
 
-          {/* Highlights strip (reference style) */}
           <motion.div
-            className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-10"
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-          >
-            <div className="bg-card/70 border border-border/40 rounded-xl p-5 backdrop-blur-xl">
-              <div className="text-sm font-medium text-foreground mb-1">🧩 Unified Team</div>
-              <div className="text-muted-foreground text-sm">Humans and AI in one workspace.</div>
-            </div>
-            <div className="bg-card/70 border border-border/40 rounded-xl p-5 backdrop-blur-xl">
-              <div className="text-sm font-medium text-foreground mb-1">🎙️ Natural Conversations</div>
-              <div className="text-muted-foreground text-sm">Speak naturally. Agents understand context.</div>
-            </div>
-            <div className="bg-card/70 border border-border/40 rounded-xl p-5 backdrop-blur-xl">
-              <div className="text-sm font-medium text-foreground mb-1">⚡ Instant Action</div>
-              <div className="text-muted-foreground text-sm">Integrated with your tools, not just chat.</div>
-            </div>
-            <div className="bg-card/70 border border-border/40 rounded-xl p-5 backdrop-blur-xl">
-              <div className="text-sm font-medium text-foreground mb-1">🧠 Always Learning</div>
-              <div className="text-muted-foreground text-sm">Agents remember, improve, and adapt to your workflow.</div>
-            </div>
-          </motion.div>
-
-          {/* Product features with agent examples */}
-          <div className="grid lg:grid-cols-2 gap-8 mb-16">
-            {/* Real-Time Orchestration */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
-              className="bg-card/80 border border-border/50 rounded-xl p-6 backdrop-blur-xl"
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-2 h-2 bg-chart-1 rounded-full"></div>
-                <h3 className="text-xl font-medium text-foreground">Real-Time Team Orchestration</h3>
-               </div>
-               <div className="mt-6 grid sm:grid-cols-2 gap-3">
-                 <div className="bg-muted/20 rounded-lg p-3 border border-border/30">
-                   <div className="text-xs text-muted-foreground mb-1">GrowthAgent</div>
-                   <div className="text-sm text-foreground">Builds landing pages, runs ads, A/B tests, tracks CAC</div>
-                 </div>
-                 <div className="bg-muted/20 rounded-lg p-3 border border-border/30">
-                   <div className="text-xs text-muted-foreground mb-1">FinanceGPT</div>
-                   <div className="text-sm text-foreground">Manages bookkeeping, budgets, and investor updates</div>
-                 </div>
-                 <div className="bg-muted/20 rounded-lg p-3 border border-border/30">
-                   <div className="text-xs text-muted-foreground mb-1">LegalBot</div>
-                   <div className="text-sm text-foreground">Drafts and sends contracts, handles compliance</div>
-                 </div>
-                 <div className="bg-muted/20 rounded-lg p-3 border border-border/30">
-                   <div className="text-xs text-muted-foreground mb-1">InboxAgent</div>
-                   <div className="text-sm text-foreground">Replies to sales/support emails and updates CRM</div>
-                 </div>
-                 <div className="bg-muted/20 rounded-lg p-3 border border-border/30">
-                   <div className="text-xs text-muted-foreground mb-1">HRAgent</div>
-                   <div className="text-sm text-foreground">Manages payroll and onboarding via Deel/Remote APIs</div>
-                 </div>
-                 <div className="bg-muted/20 rounded-lg p-3 border border-border/30">
-                   <div className="text-xs text-muted-foreground mb-1">ProductManagerGPT</div>
-                   <div className="text-sm text-foreground">Writes PRDs, prioritizes roadmap, monitors analytics</div>
-                 </div>
-               </div>
-              <div className="grid sm:grid-cols-2 gap-3">
-                <div className="bg-muted/20 rounded-lg p-3 border border-border/30">
-                  <div className="text-xs text-muted-foreground mb-1">Launch Campaign</div>
-                  <div className="flex items-center justify-between">
-                    <div className="text-sm text-foreground">Growth</div>
-                    <span className="text-xs px-2 py-0.5 rounded bg-chart-1/10 text-chart-1 border border-chart-1/20">On Target</span>
-                  </div>
-                </div>
-                <div className="bg-muted/20 rounded-lg p-3 border border-border/30">
-                  <div className="text-xs text-muted-foreground mb-1">Pricing Review</div>
-                  <div className="flex items-center justify-between">
-                    <div className="text-sm text-foreground">Product</div>
-                    <span className="text-xs px-2 py-0.5 rounded bg-chart-2/10 text-chart-2 border border-chart-2/20">Needs Attention</span>
-                  </div>
-                </div>
-                <div className="bg-muted/20 rounded-lg p-3 border border-border/30">
-                  <div className="text-xs text-muted-foreground mb-1">API Integration</div>
-                  <div className="flex items-center justify-between">
-                    <div className="text-sm text-foreground">Engineering</div>
-                    <span className="text-xs px-2 py-0.5 rounded bg-destructive/10 text-destructive border border-destructive/20">Blocked</span>
-                  </div>
-                </div>
-                <div className="bg-muted/20 rounded-lg p-3 border border-border/30">
-                  <div className="text-xs text-muted-foreground mb-1">Mid‑Market Expansion</div>
-                  <div className="flex items-center justify-between">
-                    <div className="text-sm text-foreground">Sales</div>
-                    <span className="text-xs px-2 py-0.5 rounded bg-chart-1/10 text-chart-1 border border-chart-1/20">On Target</span>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* 40-Hour Productivity Analytics */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              viewport={{ once: true }}
-              className="bg-card/80 border border-border/50 rounded-xl p-6 backdrop-blur-xl"
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-2 h-2 bg-chart-2 rounded-full"></div>
-                <h3 className="text-xl font-medium text-foreground">40‑Hour Productivity Analytics</h3>
-              </div>
-              <div className="space-y-3">
-                <div className="flex items-center justify-between bg-muted/20 rounded-lg p-3 border border-border/30">
-                  <div>
-                    <div className="text-xs text-muted-foreground">Execution Time</div>
-                    <div className="text-lg font-medium text-foreground">65%</div>
-                  </div>
-                  <div className="text-xs text-muted-foreground">1% vs 4‑wk avg</div>
-                </div>
-                <div className="flex items-center justify-between bg-muted/20 rounded-lg p-3 border border-border/30">
-                  <div>
-                    <div className="text-xs text-muted-foreground">Meeting Time</div>
-                    <div className="text-lg font-medium text-foreground">20%</div>
-                  </div>
-                  <div className="text-xs text-muted-foreground">+5% above target</div>
-                </div>
-                <div className="flex items-center justify-between bg-muted/20 rounded-lg p-3 border border-border/30">
-                  <div>
-                    <div className="text-xs text-muted-foreground">Admin Time</div>
-                    <div className="text-lg font-medium text-foreground">15%</div>
-                  </div>
-                  <div className="text-xs text-muted-foreground">Near optimal</div>
-                </div>
-              </div>
-              </motion.div>
-          </div>
-
-          {/* Trust & Security strip */}
-          <div className="grid md:grid-cols-3 gap-4 mb-16">
-            <div className="bg-card/70 border border-border/40 rounded-xl p-4 backdrop-blur-xl text-sm">
-              <span className="font-medium text-foreground">Zero Data Retention</span>
-              <div className="text-muted-foreground">Your data stays yours.</div>
-            </div>
-            <div className="bg-card/70 border border-border/40 rounded-xl p-4 backdrop-blur-xl text-sm">
-              <span className="font-medium text-foreground">SOC‑2 Minded</span>
-              <div className="text-muted-foreground">Enterprise‑grade security.</div>
-            </div>
-            <div className="bg-card/70 border border-border/40 rounded-xl p-4 backdrop-blur-xl text-sm">
-              <span className="font-medium text-foreground">Integrates with your tools</span>
-              <div className="text-muted-foreground">Slack, HubSpot, Notion, Google, and more.</div>
-            </div>
-          </div>
-
-          {/* Secondary Features */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-            {secondaryFeatures.map((feature, index) => (
-              <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-card/60 border border-border/30 rounded-lg p-6 hover:border-primary/20 transition-all duration-300 backdrop-blur-sm hover:bg-card/80"
-              >
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 bg-muted/50 rounded-lg flex items-center justify-center backdrop-blur-sm">
-                    <feature.icon className="w-5 h-5 text-foreground" />
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-foreground">{feature.title}</h4>
-                    <p className="text-sm text-muted-foreground">{feature.desc}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Agent Showcase */}
-          <motion.div
-            className="bg-card/80 border border-border/50 rounded-2xl p-8 backdrop-blur-xl"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
+            className="zact-glass-card p-6 sm:p-8"
           >
-            <div className="text-center mb-8">
-              <h3 className="text-2xl font-medium text-foreground mb-4">Example Use Cases</h3>
-              <p className="text-muted-foreground">See how teams collaborate with AI agents during live conversations.</p>
-            </div>
-            <div className="grid md:grid-cols-3 gap-6 text-left">
-              <div className="bg-muted/20 rounded-xl p-5 border border-border/30">
-                <div className="text-sm text-muted-foreground mb-2">Product Teams</div>
-                <div className="text-sm text-foreground">“Ava, summarize last sprint and generate the next tasks.”</div>
+            <div className="grid lg:grid-cols-12 gap-10 items-start">
+              {/* Feature rows (no grid of cards) */}
+              <div className="lg:col-span-7 space-y-6">
+                {primaryFeatures.map((f) => (
+                  <div key={f.title} className="flex gap-4">
+                    <div className="w-11 h-11 rounded-2xl bg-chart-2/15 border border-chart-2/30 flex items-center justify-center shrink-0">
+                      <f.icon className="w-5 h-5 text-foreground" />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="text-lg font-medium text-foreground">{f.title}</div>
+                      <div className="mt-1 text-sm text-muted-foreground">{f.description}</div>
+                      <div className="mt-2 text-xs text-muted-foreground">
+                        {f.benefits.join(" • ")}
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
-              <div className="bg-muted/20 rounded-xl p-5 border border-border/30">
-                <div className="text-sm text-muted-foreground mb-2">Sales Teams</div>
-                <div className="text-sm text-foreground">“Leo, update the CRM with today’s call notes.”</div>
-              </div>
-              <div className="bg-muted/20 rounded-xl p-5 border border-border/30">
-                <div className="text-sm text-muted-foreground mb-2">Founders</div>
-                <div className="text-sm text-foreground">“Hey Zact, schedule investor sync for next week.”</div>
+
+              {/* During/After toggle (single panel) */}
+              <div className="lg:col-span-5 lg:border-l lg:border-border/50 lg:pl-8">
+                <div className="text-sm font-medium text-foreground mb-3">What it feels like</div>
+                <div className="inline-flex rounded-full border border-border/60 bg-background/35 backdrop-blur-md p-1">
+                  <button
+                    type="button"
+                    onClick={() => setMode("during")}
+                    className={[
+                      "px-3 py-1.5 rounded-full text-xs transition-colors",
+                      mode === "during" ? "bg-chart-2/25 text-foreground" : "text-muted-foreground hover:text-foreground",
+                    ].join(" ")}
+                  >
+                    During the call
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setMode("after")}
+                    className={[
+                      "px-3 py-1.5 rounded-full text-xs transition-colors",
+                      mode === "after" ? "bg-chart-2/25 text-foreground" : "text-muted-foreground hover:text-foreground",
+                    ].join(" ")}
+                  >
+                    After the call
+                  </button>
+                </div>
+
+                <ul className="mt-5 space-y-3 text-sm text-muted-foreground">
+                  {modeLines.map((line) => (
+                    <li key={line} className="flex gap-3">
+                      <span className="mt-2 h-1.5 w-1.5 rounded-full bg-chart-2 shrink-0" />
+                      <span>{line}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-8 pt-6 border-t border-border/60">
+                  <div className="text-xs uppercase tracking-wide text-muted-foreground mb-3">Also included</div>
+                  <div className="text-sm text-muted-foreground leading-relaxed">
+                    Syncs to your tools (docs + tasks) • Meeting context awareness (agenda + attendees) • Real‑time memory + history • Notifications & traceability • Approvals when needed • Security‑minded by default
+                  </div>
+                </div>
               </div>
             </div>
           </motion.div>

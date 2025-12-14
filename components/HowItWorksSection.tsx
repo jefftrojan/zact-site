@@ -1,127 +1,142 @@
 "use client";
 
-import { motion, useScroll, useTransform } from 'framer-motion'
-import { useState, useRef } from 'react'
+import { motion } from 'framer-motion'
+import { useState } from 'react'
+import CinematicBackground from './CinematicBackground'
 
 export default function HowItWorksSection() {
   const [activeStep, setActiveStep] = useState(0)
-  const containerRef = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  })
 
   const steps = [
     {
-      title: "Create Agents",
-      subtitle: "Assign names, roles, and tasks",
+      title: "Connect your calendar",
+      subtitle: "One setup, then it runs",
       points: [
-        "Name the agent and define its scope",
-        "Set guardrails and approval rules",
-        "Give it access only to what it needs"
+        "Invite Zact to the meetings you want covered",
+        "Connect the tools you already use (Notion, Asana/Jira, Slack, Docs, CRM)",
+        "Set preferences (when to speak up, who gets tasks)",
+        "Optional: approvals for sensitive actions"
       ]
     },
     {
-      title: "Connect Workflows", 
-      subtitle: "Integrate with your tools",
+      title: "Zact joins on time",
+      subtitle: "Prepared with meeting context",
       points: [
-        "Hook into Slack, Notion, Jira, Calendar, CRM",
-        "Use existing accounts and permissions",
-        "Keep your data in your stack"
+        "Understands title, agenda, and attendees",
+        "Keeps a running memory of decisions",
+        "Stays relevant — not spammy"
       ]
     },
     {
-      title: "Collaborate Live",
-      subtitle: "Talk in real-time meetings",
+      title: "Live, in‑meeting help",
+      subtitle: "Participates like a teammate",
       points: [
-        "Run stand‑ups and planning with voice commands",
-        "Ask for summaries, next steps, owners",
-        "See updates posted where you already work"
+        "Summarizes mid‑call when needed",
+        "Clarifies owners + deadlines in real time",
+        "Helps steer back to decisions"
       ]
     },
     {
-      title: "Get Things Done",
-      subtitle: "Instant action and results",
+      title: "Automatic follow‑through",
+      subtitle: "Turns talk into execution",
       points: [
-        "Schedule follow‑ups and calendar holds",
-        "Open Jira issues and update status",
-        "Draft notes and share to Slack/Notion"
+        "Converts decisions into owners + next steps",
+        "Pushes outcomes into docs + tasks",
+        "History + notifications so nothing slips"
       ]
     }
   ]
   
   return (
-    <section ref={containerRef} id="how-it-works" className="min-h-[85vh] flex">
-      {/* Left Side - Dark Blue */}
-      <div className="w-1/2 bg-primary relative flex items-center justify-center sticky top-20 self-start">
-        <div className="max-w-md px-8">
+    <section id="how-it-works" className="relative overflow-hidden">
+      <CinematicBackground src="/bg-3.png" overlay={0.86} imageClassName="object-cover object-center" />
+      <div className="relative z-10 container mx-auto px-6 py-16 sm:py-20 lg:py-24">
+        <div className="max-w-6xl mx-auto">
           <motion.div
-            key={activeStep}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}
-            className="text-center"
+            className="text-center mb-10 sm:mb-12 lg:mb-16"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
           >
-            <div className="mx-auto mb-6 w-12 h-12 rounded-full bg-primary-foreground/10 text-primary-foreground flex items-center justify-center text-base font-medium">
-              {String(activeStep + 1).padStart(2, '0')}
-            </div>
-            <h2 className="text-3xl font-medium text-primary-foreground mb-2">
-              {steps[activeStep].title}
+            <h2 className="text-2xl md:text-3xl lg:text-5xl font-display font-semibold text-foreground">
+              How it works
             </h2>
-            <p className="text-base text-primary-foreground/80">
-              {steps[activeStep].subtitle}
+            <p className="mt-3 text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto">
+              Zact joins the conversation, keeps the context, and turns outcomes into execution — automatically.
             </p>
           </motion.div>
-        </div>
-        
-        {/* Progress dots */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
-          {steps.map((_, index) => (
-            <motion.div
-              key={index}
-              className={`w-2 h-2 rounded-full transition-colors duration-300 ${
-                activeStep === index ? 'bg-primary-foreground' : 'bg-primary-foreground/30'
-              }`}
-              onClick={() => setActiveStep(index)}
-            />
-          ))}
-        </div>
-      </div>
 
-      {/* Right Side - White */}
-      <div className="w-1/2 bg-background">
-        <div className="max-w-2xl mx-auto px-8 py-16">
-          {steps.map((step, index) => (
-            <motion.div
-              key={step.title}
-              className={`mb-16 transition-all duration-500 ${
-                activeStep === index ? 'opacity-100' : 'opacity-30'
-              }`}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: activeStep === index ? 1 : 0.3 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              onViewportEnter={() => setActiveStep(index)}
-            >
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-muted/60 text-foreground/80 text-xs font-medium flex items-center justify-center">
-                    {String(index + 1).padStart(2, '0')}
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-medium text-foreground">{step.title}</h3>
-                    <p className="text-sm text-muted-foreground">{step.subtitle}</p>
-                  </div>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="zact-glass-card p-6 sm:p-8"
+          >
+            <div className="grid lg:grid-cols-12 gap-8 items-start">
+              {/* Step nav (single panel) */}
+              <div className="lg:col-span-5">
+                <div className="flex lg:flex-col gap-4 overflow-x-auto lg:overflow-visible pb-1">
+                  {steps.map((step, idx) => {
+                    const active = idx === activeStep
+                    return (
+                      <button
+                        key={step.title}
+                        type="button"
+                        onClick={() => setActiveStep(idx)}
+                        className={[
+                          "flex-shrink-0 text-left transition-colors",
+                          "px-0 py-0 border-0 bg-transparent",
+                        ].join(" ")}
+                      >
+                        <div className="flex items-start gap-3">
+                          <div
+                            className={[
+                              "mt-1 h-6 w-0.5 rounded-full",
+                              active ? "bg-chart-2" : "bg-border/70",
+                            ].join(" ")}
+                            aria-hidden
+                          />
+                          <div className="min-w-0">
+                            <div className={["text-sm", active ? "text-foreground font-medium" : "text-muted-foreground"].join(" ")}>
+                              {String(idx + 1).padStart(2, "0")} — {step.title}
+                            </div>
+                            <div className="text-xs text-muted-foreground mt-1">{step.subtitle}</div>
+                          </div>
+                        </div>
+                      </button>
+                    )
+                  })}
                 </div>
-                <ul className="list-disc pl-6 space-y-2">
-                  {step.points.map((p) => (
-                    <li key={p} className="text-muted-foreground">{p}</li>
-                  ))}
-                </ul>
               </div>
-            </motion.div>
-          ))}
+
+              {/* Step content (no repeated cards) */}
+              <div className="lg:col-span-7 lg:border-l lg:border-border/50 lg:pl-8">
+                <motion.div
+                  key={activeStep}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.25 }}
+                >
+                  <div className="text-xs text-muted-foreground">Step {String(activeStep + 1).padStart(2, "0")}</div>
+                  <h3 className="mt-2 text-2xl font-display font-semibold text-foreground">
+                    {steps[activeStep].title}
+                  </h3>
+                  <p className="mt-2 text-muted-foreground">{steps[activeStep].subtitle}</p>
+
+                  <ul className="mt-6 space-y-3 text-sm text-muted-foreground">
+                    {steps[activeStep].points.map((p) => (
+                      <li key={p} className="flex gap-3">
+                        <span className="mt-2 h-1.5 w-1.5 rounded-full bg-chart-2 shrink-0" />
+                        <span>{p}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

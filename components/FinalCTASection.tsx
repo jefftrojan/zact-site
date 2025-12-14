@@ -4,14 +4,12 @@ import { motion } from 'framer-motion'
 import { Button } from './ui/button'
 import WaitlistDialog from './WaitlistDialog'
 import { ArrowRight } from 'lucide-react'
+import CinematicBackground from './CinematicBackground'
 
 export default function FinalCTASection() {
   return (
-    <section className="py-16 sm:py-20 lg:py-24 bg-primary text-primary-foreground relative overflow-hidden">
-      {/* Glassmorphism background elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/80 to-primary/60 backdrop-blur-3xl"></div>
-      <div className="absolute top-0 left-0 w-96 h-96 bg-white/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
+    <section className="py-16 sm:py-20 lg:py-24 relative overflow-hidden">
+      <CinematicBackground src="/bg-mascot.png" overlay={0.84} imageClassName="object-cover object-center" />
       
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
@@ -22,18 +20,18 @@ export default function FinalCTASection() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-2xl md:text-4xl lg:text-6xl font-medium leading-tight">
-              Join the Future of Work
+            <h2 className="text-2xl md:text-4xl lg:text-6xl font-display font-semibold leading-tight text-foreground">
+              Bring an AI teammate into the room.
             </h2>
-            <p className="text-base sm:text-lg text-primary-foreground/80 max-w-2xl mx-auto leading-relaxed">
-              Zact is redefining how teams and AI collaborate. Because work should feel like teamwork — even with machines.
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              Zact joins with context, participates in real time, and turns decisions into action — so meetings feel human and outcomes actually ship.
             </p>
             <div className="pt-4">
-              <WaitlistDialog triggerLabel="Request Invite →" triggerClass="bg-background text-foreground hover:bg-background/90 px-8 py-4 backdrop-blur-sm border border-white/20 shadow-2xl" />
+              <WaitlistDialog triggerLabel="Request Invite →" triggerClass="bg-chart-2 text-foreground hover:bg-chart-2/90 px-8 py-4 backdrop-blur-sm border border-border/60 shadow-2xl" />
             </div>
             <div className="pt-8">
-              <p className="text-sm text-primary-foreground/60">
-                Talk. Act. Zact.
+              <p className="text-sm text-muted-foreground">
+                Meet. Decide. Ship.
               </p>
             </div>
           </motion.div>

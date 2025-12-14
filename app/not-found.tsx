@@ -1,18 +1,23 @@
-import Link from 'next/link'
-
 export default function NotFound() {
   return (
-    <section className="py-24 bg-background">
-      <div className="container mx-auto px-6 text-center">
-        <h1 className="text-6xl font-semibold text-foreground">404</h1>
-        <p className="mt-4 text-muted-foreground">We couldn’t find that page.</p>
+    <main className="min-h-[70vh] flex items-center justify-center px-6">
+      <div className="max-w-xl text-center">
+        <div className="text-sm text-muted-foreground mb-2">404</div>
+        <h1 className="text-3xl md:text-5xl font-display font-semibold text-foreground">
+          Page not found
+        </h1>
+        <p className="mt-4 text-muted-foreground">
+          If you expected something here, ping us — we’ll fix it fast.
+        </p>
         <div className="mt-8">
-          <Link href="/" className="text-primary underline">Back to Home</Link>
+          <a
+            href="/"
+            className="inline-flex items-center justify-center rounded-xl px-5 py-3 bg-chart-2 text-foreground border border-border/60"
+          >
+            Back to home
+          </a>
         </div>
       </div>
-    </section>
-  )
+    </main>
+  );
 }
-
-
-

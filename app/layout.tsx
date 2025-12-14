@@ -1,11 +1,21 @@
 import type { Metadata } from 'next'
-import { Plus_Jakarta_Sans } from 'next/font/google'
+import { Inter, Space_Grotesk } from 'next/font/google'
 import './globals.css'
 import Navigation from '../components/Navigation'
 import Footer from '../components/Footer'
 import Script from 'next/script'
 
-const plusJakarta = Plus_Jakarta_Sans({ subsets: ['latin'], weight: ['400','500','600','700','800'] })
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-inter',
+})
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  weight: ['500', '600', '700'],
+  variable: '--font-space-grotesk',
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.usezact.com'),
@@ -13,18 +23,20 @@ export const metadata: Metadata = {
     default: 'Zact — The Zoom for AI Agents',
     template: '%s | Zact'
   },
-  description: 'Create, name, and talk to your AI agents like real teammates — with voice, memory, and workflow integration.',
+  description: 'Zact is where your AI joins the conversation, participates in real-time, and automatically handles the follow-up.',
   keywords: [
     'AI agents',
     'voice AI',
+    'meeting assistant',
+    'meeting recap',
+    'action items',
     'workflow automation',
-    'meeting AI',
     'Zoom for AI',
     'Zact'
   ],
   openGraph: {
     title: 'Zact — The Zoom for AI Agents',
-    description: 'Create, name, and talk to your AI agents like real teammates — in live meetings with voice, memory, and workflow integration.',
+    description: 'Where your AI joins the conversation, participates in real-time, and automatically handles the follow-up.',
     url: 'https://www.usezact.com',
     siteName: 'Zact',
     images: [
@@ -64,7 +76,7 @@ export default function RootLayout({
           strategy="afterInteractive"
         />
       </head>
-      <body className={plusJakarta.className}>
+      <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans`}>
         <Navigation />
         {children}
         <Footer />

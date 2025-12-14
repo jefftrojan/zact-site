@@ -4,23 +4,30 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { Button } from '../ui/button'
 import WaitlistDialog from '../WaitlistDialog'
+import CinematicBackground from '../CinematicBackground'
 
 export default function AboutContent() {
   return (
     <main className="min-h-screen bg-background">
       <section className="pt-28 pb-16 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-chart-2/10 to-chart-4/10 blur-3xl" />
+        <CinematicBackground
+          src="/bg-hero.png"
+          priority
+          overlay={0.82}
+          overlayVariant="hero"
+          imageClassName="object-cover object-top"
+        />
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-5xl mx-auto text-center space-y-6">
             <motion.h1
-              className="text-4xl md:text-6xl font-medium text-foreground"
+              className="text-4xl md:text-6xl font-display font-semibold text-foreground"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
             >
-              We’re building the OS for AI‑run companies
+              We’re building an AI teammate that joins your meetings.
             </motion.h1>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Zact helps founders focus on building, while autonomous agents coordinate work across growth, finance, legal and success.
+              Zact shows up with context, speaks up when it matters, and turns decisions into clean follow‑through across your tools.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <WaitlistDialog triggerLabel="Join the Waitlist" />
@@ -32,38 +39,88 @@ export default function AboutContent() {
         </div>
       </section>
 
-      <section className="py-20">
-        <div className="container mx-auto px-6 max-w-4xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="space-y-6"
-          >
-            <h2 className="text-2xl md:text-4xl font-medium text-foreground">How we started</h2>
-            <p className="text-muted-foreground leading-relaxed">
-              We’ve known each other for almost 4 years, first meeting as freshmen in 2022. Since then, we’ve shipped
-              multiple projects together, traveled across states and countries, and won 10+ hackathons — one of which
-              led to broader recognition. We’ve all met in person and built a strong working relationship over the years.
-            </p>
-            <p className="text-muted-foreground leading-relaxed">
-              Zact began from a simple belief: building product should be the only focus. Everything else — marketing,
-              sales, analytics, and operations — should run itself. We prototyped agentic workflows and saw firsthand how
-              coordinated agents remove tool‑switching and context loss. Zact is that system, productized for SaaS founders.
-            </p>
-          </motion.div>
+      <section className="py-16 sm:py-20 relative overflow-hidden">
+        <CinematicBackground src="/bg-1.png" overlay={0.88} imageClassName="object-cover object-center" />
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="max-w-5xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55 }}
+              className="zact-glass-card p-7 sm:p-10"
+            >
+              <h2 className="text-2xl md:text-4xl font-display font-semibold text-foreground">
+                Why we started Zact
+              </h2>
+              <div className="mt-5 space-y-4 text-muted-foreground leading-relaxed">
+                <p>
+                  Meetings create momentum. Follow‑through loses it. Teams leave a call with good energy… then decisions disappear into
+                  chat logs, owners get fuzzy, and “what are we doing next?” comes back the next day.
+                </p>
+                <p>
+                  We built Zact because we wanted an AI that feels human: prepared from the invite, aware of who’s in the room,
+                  able to ask a crisp clarification, and able to drive toward a decision — then carry outcomes into the tools you already use.
+                </p>
+                <p>
+                  We’ve been building together for years, shipping fast, iterating in public, and obsessing over one thing:
+                  turning confusion into clarity without making people feel dumb.
+                </p>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
-      <section className="py-20 bg-muted/30">
-        <div className="container mx-auto px-6 max-w-5xl">
-          <div className="grid md:grid-cols-3 gap-8">
-            {[{h:'Who we are',t:'All-technical founding team. We ship fast and own outcomes.'},{h:'What we value',t:'Focus, clarity, ownership, kindness.'},{h:'How to join',t:'Explore roles on Careers or join the waitlist to hear first.'}].map((b, i) => (
-              <div key={i} className="rounded-2xl border border-border bg-card/60 backdrop-blur-xl p-6">
-                <div className="text-sm text-muted-foreground">{b.h}</div>
-                <div className="text-xl font-medium text-foreground mt-2">{b.t}</div>
+      <section className="py-16 sm:py-20">
+        <div className="container mx-auto px-6">
+          <div className="max-w-5xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55 }}
+              className="zact-glass-card p-7 sm:p-10"
+            >
+              <div className="grid md:grid-cols-12 gap-8">
+                <div className="md:col-span-5">
+                  <h2 className="text-2xl md:text-3xl font-display font-semibold text-foreground">
+                    What we believe
+                  </h2>
+                  <p className="mt-3 text-muted-foreground leading-relaxed">
+                    The future of work isn’t more tools. It’s fewer tabs — and more shared understanding.
+                  </p>
+                </div>
+
+                <div className="md:col-span-7 md:border-l md:border-border/60 md:pl-8">
+                  <div className="space-y-6">
+                    <div>
+                      <div className="text-sm text-muted-foreground">Personality</div>
+                      <div className="mt-2 text-foreground leading-relaxed">
+                        Smart, not arrogant • Optimistic • Creative & curious • Human‑first • Minimal, not empty
+                      </div>
+                    </div>
+                    <div className="pt-6 border-t border-border/60">
+                      <div className="text-sm text-muted-foreground">How we build</div>
+                      <ul className="mt-3 space-y-2 text-muted-foreground">
+                        <li className="flex gap-3">
+                          <span className="mt-2 h-1.5 w-1.5 rounded-full bg-chart-2 shrink-0" />
+                          <span>Design for calm clarity first, then add power.</span>
+                        </li>
+                        <li className="flex gap-3">
+                          <span className="mt-2 h-1.5 w-1.5 rounded-full bg-chart-2 shrink-0" />
+                          <span>Make outcomes obvious: decisions, owners, deadlines — no clutter.</span>
+                        </li>
+                        <li className="flex gap-3">
+                          <span className="mt-2 h-1.5 w-1.5 rounded-full bg-chart-2 shrink-0" />
+                          <span>Respect trust: security‑minded by default.</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
               </div>
-            ))}
+            </motion.div>
           </div>
         </div>
       </section>
@@ -79,9 +136,8 @@ export default function AboutContent() {
             <div className="space-y-4">
               <h3 className="text-xl md:text-2xl font-medium text-foreground">What we’re building</h3>
               <p className="text-muted-foreground leading-relaxed">
-                Solo SaaS founders spend most of their time juggling 15+ tools. Zact replaces that stack with coordinated
-                AI agents that understand SaaS business models. Sales, Marketing, Analytics, and Success agents share context
-                and act in real‑time to drive growth while you ship product.
+                A meeting assistant that feels like a real teammate: prepared with context, able to participate live, and able to
+                carry the follow‑up into Notion/Docs/tasks so work actually moves.
               </p>
             </div>
             <div className="space-y-4">
