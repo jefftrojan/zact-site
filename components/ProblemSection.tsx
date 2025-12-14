@@ -30,7 +30,7 @@ export default function ProblemSection() {
           >
             <h2 className="text-3xl lg:text-5xl font-display font-semibold mb-6 text-foreground">Meetings create momentum. Follow‑ups lose it.</h2>
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Decisions disappear into chat logs. Action items get fuzzy. Notes end up everywhere. Zact keeps the thread — so Gen‑Z teams move fast without feeling dumb.
+                  Decisions disappear into chat logs. Action items get fuzzy. Notes end up everywhere. Zact keeps the thread — so your team moves fast without feeling lost (or cringe).
             </p>
           </motion.div>
 

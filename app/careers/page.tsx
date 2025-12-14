@@ -1,6 +1,6 @@
 export const metadata = {
   title: 'Careers — Zact',
-  description: 'Join us to build the AI‑first operating system for companies.'
+  description: 'Join Zact to build an AI teammate that participates in meetings in real time — with context and follow‑through.'
 }
 
 import CinematicBackground from '../../components/CinematicBackground'

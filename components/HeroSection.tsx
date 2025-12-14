@@ -41,7 +41,7 @@ export default function HeroSection() {
               className="inline-flex items-center gap-2 zact-pill text-foreground px-4 py-2"
             >
               <Zap className="w-4 h-4" />
-              <span className="text-sm font-medium">Zact — where your AI joins the conversation</span>
+              <span className="text-sm font-medium">Zact — your AI teammate, live in the meeting</span>
             </motion.div>
 
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-display font-semibold leading-tight text-foreground">
@@ -58,7 +58,7 @@ export default function HeroSection() {
                 </motion.span>
               </span>
               <br />
-              <span className="text-foreground/70">An AI teammate that speaks up in real time.</span>
+              <span className="text-foreground/70">An AI teammate that participates in real time.</span>
             </h1>
 
             <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
