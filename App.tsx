@@ -1,8 +1,7 @@
 import HeroSection from './components/HeroSection'
-import FinalCTASection from './components/FinalCTASection'
 import ProblemSection from './components/ProblemSection'
 import HowItWorksSection from './components/HowItWorksSection'
-import FeaturesSection from './components/FeaturesSection'
+import FinalCTASection from './components/FinalCTASection'
 
 export default function App() {
   return (
@@ -10,7 +9,6 @@ export default function App() {
       <HeroSection />
       <ProblemSection />
       <HowItWorksSection />
-      <FeaturesSection />
       <FinalCTASection />
     </div>
   )
